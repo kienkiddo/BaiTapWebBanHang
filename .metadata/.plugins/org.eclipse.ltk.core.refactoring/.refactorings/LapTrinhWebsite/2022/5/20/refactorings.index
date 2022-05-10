@@ -1,0 +1,22 @@
+1652101372276	Rename resource 'header.jspp'
+1652101513188	Move 'index.jsp' to 'view'
+1652148524174	Delete element
+1652148626935	Rename type 'Register'
+1652149064075	Rename package 'DB'
+1652149316123	Rename package 'Db'
+1652149510605	Rename type 'SQLConnect'
+1652150381782	Rename package 'Comom'
+1652158216977	Delete element
+1652158892317	Rename type 'CardItem'
+1652159081609	Rename package 'DB'
+1652159090989	Rename package 'Commom'
+1652159115400	Rename package 'HomeController'
+1652159125509	Rename package 'Model'
+1652159267044	Rename type 'itemDB'
+1652172213647	Rename type 'ItemDB'
+1652172242884	Rename type 'UserDB'
+1652172362431	Move compilation unit
+1652173955678	Move compilation unit
+1652173990178	Move compilation unit
+1652174237425	Delete element
+1652180196907	Delete element

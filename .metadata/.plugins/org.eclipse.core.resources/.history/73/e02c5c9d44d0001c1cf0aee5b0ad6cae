@@ -1,0 +1,17 @@
+package io;
+
+import java.util.ArrayList;
+
+import model.Item;
+
+public class ItemData {
+
+	
+	public static ArrayList<Item> all(){
+		
+	}
+	
+	public static Item withId(int id) {
+		return null;
+	}
+}

@@ -1,0 +1,22 @@
+package Model;
+
+public class PageInfo {
+
+	private String path;
+	
+	private String title;
+	
+	public PageInfo(String title, String path) {
+		this.title = title;
+		this.path = path;
+	}
+	
+	public String getPath() {
+		return this.path;
+	}
+	
+	public String getTitle() {
+		return this.title;
+	}
+	
+}

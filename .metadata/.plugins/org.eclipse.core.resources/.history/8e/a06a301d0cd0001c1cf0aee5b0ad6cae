@@ -1,0 +1,91 @@
+package Model;
+
+import DB.ResutSet;
+
+public class User {
+	
+	private int id;
+	
+	private String name;
+	
+	private String email;
+	
+	private String phone;
+	
+	private String password;
+	
+	private int level;
+	
+	private String strCart;
+	
+	private int status;
+	
+	public User(String name, String email, String phone, String password) {
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.password = password;
+	}
+
+	protected void fill(ResultSet res) {
+		
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
+
+}

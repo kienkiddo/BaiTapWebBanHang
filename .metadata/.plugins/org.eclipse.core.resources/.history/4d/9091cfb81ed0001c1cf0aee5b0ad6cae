@@ -1,0 +1,24 @@
+package Commom;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+
+public class Security {
+	public static String getMd5(String s) {
+		try {
+			byte[] bytesOfMessage = s.getBytes("UTF-8");
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] theMD5digest = md.digest(bytesOfMessage);
+			BigInteger no = new BigInteger(1, theMD5digest);
+
+			String hashtext = no.toString(16);
+			while (hashtext.length() < 32) {
+				hashtext = "0" + hashtext;
+			}
+			return hashtext;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+}

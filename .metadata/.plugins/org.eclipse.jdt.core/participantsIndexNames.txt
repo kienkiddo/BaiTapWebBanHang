@@ -1,0 +1,5 @@
+INDEX VERSION 1.131
+C:\Users\kiddo\OneDrive\Desktop\LTWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\389726909.index
+\LapTrinhWebsite\src\main\java
+C:\Users\kiddo\OneDrive\Desktop\LTWeb\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\4229214141.index
+\LapTrinhWebsite\src\main\java

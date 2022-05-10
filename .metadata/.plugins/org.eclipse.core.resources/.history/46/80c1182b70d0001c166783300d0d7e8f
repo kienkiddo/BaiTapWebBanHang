@@ -1,0 +1,40 @@
+package controller.home;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import commom.PageInfo;
+
+/**
+ * Servlet implementation class IndexServlet
+ */
+@WebServlet("/dang-ky")
+public class RegisterServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PageInfo page = new PageInfo("Home", "register.jsp");
+		page.forward(request, response);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String message = "";
+		if (password.length() < 4 || password.length() > 16) {
+			message = "Mật khẩu phải từ 4 đến 16 kí tự";
+		} else if (name.length() < 4 || name.length() > 128) {
+			message = "Họ tên phải từ 4 đến 16 ký tự"
+		}
+	}
+
+}

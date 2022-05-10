@@ -1,0 +1,3 @@
+ 
+ <script src="<c:url value='/home/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
+ </body>

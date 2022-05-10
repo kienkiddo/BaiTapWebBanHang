@@ -1,0 +1,47 @@
+package controller.home;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import commom.PageInfo;
+
+/**
+ * Servlet implementation class IndexServlet
+ */
+@WebServlet("/dang-ky")
+public class RegisterServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PageInfo page = new PageInfo("Home", "register.jsp");
+		page.forward(request, response);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		String pass = request.getParameter("pass");
+		String message = "";
+		if (name.length() < 4 || name.length() > 128) {
+			message = "Họ tên phải từ 4 đến 16 ký tự";
+		} else if (pass.length() < 4 || pass.length() > 16) {
+			message = "Mật khẩu phải từ 4 đến 16 kí tự";
+		} else if (!phone.startsWith("0") || phone.length() < 8 || phone.length() > 12) {
+			message = "Số điện thoại phải bắt đầu từ số 0 và từ 8 đến 12 ký tự";
+		}
+		
+		if (!message.equals("")) {
+			request.setAttribute("message", message);
+			this.doGet(request, response);
+		}
+	}
+
+}

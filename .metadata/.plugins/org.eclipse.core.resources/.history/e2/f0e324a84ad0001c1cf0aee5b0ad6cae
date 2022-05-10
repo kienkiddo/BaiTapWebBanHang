@@ -1,0 +1,17 @@
+package io;
+
+import java.util.ArrayList;
+
+import model.Color;
+
+public class ColorData {
+
+	public static ArrayList<Color> list = null;
+	
+	public static ArrayList<Color> all(){
+		if (list == null) {
+			
+		}
+		return list;
+	}
+}

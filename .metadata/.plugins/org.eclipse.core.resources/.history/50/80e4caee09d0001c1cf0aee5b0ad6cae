@@ -1,0 +1,23 @@
+package DB;
+
+import java.security.MessageDigest;
+import java.sql.SQLException;
+
+import Model.User;
+
+public class UserDB {
+	public static void insert(User user) {
+	
+		try {
+			String sql = "INSERT INTO user(id, name, phone, email, password) VALUES(NULL, ?, ?, ?, ?)";
+			var ps = DBConnect.getConn().prepareStatement(sql);
+			ps.setString(1, user.getName());
+			ps.setString(2, user.getPhone());
+			ps.setString(3, user.getEmail());
+			ps.setString(4, ser.);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+}

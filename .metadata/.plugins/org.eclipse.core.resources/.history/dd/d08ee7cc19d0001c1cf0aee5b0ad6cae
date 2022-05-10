@@ -1,0 +1,9 @@
+package Model;
+
+public class Info {
+
+	private int size;
+	
+	private int quantity;
+	
+}

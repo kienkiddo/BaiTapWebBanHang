@@ -1,0 +1,54 @@
+package commom;
+
+import java.math.BigInteger;
+import java.security.MessageDigest;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
+public class Security {
+	
+	public static String getMd5(String s) {
+		try {
+			byte[] bytesOfMessage = s.getBytes("UTF-8");
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] theMD5digest = md.digest(bytesOfMessage);
+			BigInteger no = new BigInteger(1, theMD5digest);
+
+			String hashtext = no.toString(16);
+			while (hashtext.length() < 32) {
+				hashtext = "0" + hashtext;
+			}
+			return hashtext;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
+	public static void setHashkey(String hashkey, HttpServletResponse response) {
+		Cookie cookie = new Cookie("hashkey", hashkey);
+		cookie.setMaxAge(60 * 60 * 24 * 90);
+		response.addCookie(cookie);
+	}
+	
+	public static String getHashkey(Cookie[] cookies) {
+		if (cookies == null) {
+			return null;
+		}
+		for (int i = 0; i < cookies.length; i++) {
+			String name = cookies[i].getName();
+			String value = cookies[i].getValue();
+			if (name.equals("hashkey")) {
+				return value;
+			}
+		}
+		return null;
+	}
+	
+	public static void removeHashkey(HttpServletResponse response) {
+		Cookie cookie = new Cookie("hashkey", "");
+		cookie.setMaxAge(0);
+		response.addCookie(cookie);
+	}
+}

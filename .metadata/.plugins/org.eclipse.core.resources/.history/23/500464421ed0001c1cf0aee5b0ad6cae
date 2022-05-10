@@ -1,0 +1,15 @@
+package Model;
+
+public class CardItem {
+	private int id;
+	
+	private int price;
+	
+	private Info info;
+	
+	public CardItem(int id, int price, Info info) {
+		this.id = id;
+		this.price = price;
+		this.info = info;
+	}
+}

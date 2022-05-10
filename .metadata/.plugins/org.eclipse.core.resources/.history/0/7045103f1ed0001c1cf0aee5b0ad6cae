@@ -1,0 +1,43 @@
+package Model;
+
+import java.sql.Timestamp;
+import java.util.ArrayList;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
+
+public class Cart {
+
+	private int id;
+	
+	private int userId;
+	
+	private String sessionId;
+
+	private String strData;
+	
+	private Timestamp timeupdate; 
+	
+	private ArrayList<CardItem> items = null;
+	
+	public ArrayList<CardItem> getItems() {
+		if (items == null) {
+			items = new ArrayList<CardItem>();
+			JSONArray job = (JSONArray) JSONValue.parse(this.strData);
+			for (var obj : job) {
+				JSONObject job2 = (JSONObject) obj;
+				int id = Integer.parseInt(job2.get("id").toString());
+				int price = Integer.parseInt(job2.get("price").toString());
+				var info = Info.parseJson(job2.get("info").toString());
+				
+			
+			}
+			
+			
+		}
+		return items;
+	}
+}
+

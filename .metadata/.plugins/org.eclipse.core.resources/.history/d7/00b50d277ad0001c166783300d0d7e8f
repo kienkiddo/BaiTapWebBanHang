@@ -1,0 +1,36 @@
+package controller.home;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import commom.PageInfo;
+import commom.Security;
+import io.ItemData;
+
+/**
+ * Servlet implementation class IndexServlet
+ */
+@WebServlet("/chi-tiet-san-pham")
+public class DetailServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		request.setAttribute("item", ItemData.withId(id)
+				);
+		PageInfo page = new PageInfo("Chi tiết sản phẩm", "detail.jsp");
+		page.forward(request, response);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}

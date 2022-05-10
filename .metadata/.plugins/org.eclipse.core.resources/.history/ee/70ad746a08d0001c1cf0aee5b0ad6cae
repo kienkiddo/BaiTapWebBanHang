@@ -1,0 +1,57 @@
+package DB;
+
+public class SQLConnect {
+	private String url = "jdbc:mysql://localhost:3306/thiblxmay";
+	private String user = "root";
+	private String pass = "";
+
+	public static Connection conn;
+
+	public DBConnect() {
+		if (conn == null) {
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection(url, user, pass);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void setAutoCommit(boolean isAutoCommit) {
+		new DBConnect();
+		try {
+			Function.log("auto commit check");
+			conn.setAutoCommit(isAutoCommit);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void commit() {
+		try {
+			if (conn.getAutoCommit()) {
+				return;
+			}
+			Function.log("committtttt");
+			conn.commit();		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void rollback() {
+		try {
+			if (conn.getAutoCommit()) {
+				return;
+			}
+			Function.log("rollback");
+			conn.rollback();
+			PageInfo.message = new Message("error", "Thực hiện thất bại !!!");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+}

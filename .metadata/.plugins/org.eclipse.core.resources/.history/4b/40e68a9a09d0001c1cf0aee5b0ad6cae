@@ -1,0 +1,9 @@
+package DB;
+
+import Model.User;
+
+public class UserDB {
+	public static void insert(User user) {
+		
+	}
+}

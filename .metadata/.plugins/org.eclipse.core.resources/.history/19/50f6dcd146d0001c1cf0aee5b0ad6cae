@@ -1,0 +1,32 @@
+package io;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import model.Item;
+import model.User;
+
+public class ItemData {
+
+	public static ArrayList<Item> all(){
+		ArrayList<Item> items = new ArrayList<Item>();
+		try {
+			String sql = "SELECT * FROM item WHERE type=0 LIMIT 1";
+			var ps = DBConnect.getConn().createStatement();
+			ResultSet res = ps.executeQuery(sql);
+			while (res.next()) {
+				int id = res.getInt("id");
+				int type = res
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return items;
+	}
+	
+	public static Item withId(int id) {
+		return null;
+	}
+}

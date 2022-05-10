@@ -1,0 +1,63 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<div class="container" style="margin-top: 50px">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <h2 class="text-center mb-4">ĐĂNG KÝ</h2>
+      <form id="form" method="POST" action="dang-ky">
+        <div class="input-group form-group">
+          <span class="input-group-prepend">
+            <div class="input-group-text bg-light border-right-0"><i class="fa fa-user"></i>
+            </div>
+          </span>
+          <input class="form-control py-2 border-left-0 border" id="name" name="name"
+            placeholder="Họ và tên" required>
+        </div>
+        <div class="input-group form-group">
+          <span class="input-group-prepend">
+            <div class="input-group-text bg-light border-right-0"><i class="fas fa-phone"></i>
+            </div>
+          </span>
+          <input class="form-control py-2 border-left-0 border"  id="phone" name="phone" placeholder="Số điện thoại" type="number" required>
+        </div>
+        <div class="input-group form-group">
+          <span class="input-group-prepend">
+            <div class="input-group-text bg-light border-right-0"><i class="far fa-envelope"></i>
+            </div>
+          </span>
+          <input class="form-control py-2 border-left-0 border" id="email" name="email"
+            placeholder="Email" type="email" required>
+        </div>
+        <div class="input-group form-group">
+          <span class="input-group-prepend">
+            <div class="input-group-text bg-light border-right-0"><i class="fas fa-lock"></i>
+            </div>
+          </span>
+          <input class="form-control py-2 border-left-0 border" id="pass" name="pass"
+            placeholder="Mật khẩu" type="password" required>
+        </div>
+		<div class="text-danger" id="noti">
+		</div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-sm font-weight-bold form-control" type="button" onclick="fSubmit()"><span class="fas fa-key"></span> ĐĂNG KÝ</button>
+        </div>
+      </form>
+      <p class="text-center">Bạn đã có tài khoản? <a href="dang-nhap">Đăng nhập</a></p>
+    </div>
+  </div>
+</div>
+
+<script>	
+	function fSubmit(){
+		$.ajax({
+			url: "dang-ky",
+			type: "post",
+			data: $("#form").serialize(),
+			success: function(res){
+				$("#noti").html(res);
+				
+			}
+		})
+	}
+</script>

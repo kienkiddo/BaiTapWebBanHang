@@ -1,0 +1,9 @@
+package Model;
+
+public class CardItem {
+	private Item item;
+	
+	private int price;
+	
+	private Info info;
+}

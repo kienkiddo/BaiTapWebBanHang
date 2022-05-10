@@ -1,0 +1,8 @@
+package commom;
+
+public class Resource {
+	
+	public static final int TYPE_SHOES = 1;
+	
+
+}

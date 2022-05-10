@@ -1,0 +1,10 @@
+package io;
+
+import java.util.ArrayList;
+
+public class ColorData {
+
+	public static ArrayList<Color> all(){
+		
+	}
+}

@@ -1,0 +1,12 @@
+package io;
+
+import model.Item;
+
+public class ItemData {
+
+	public static 
+	
+	public static Item withId(int id) {
+		return null;
+	}
+}
