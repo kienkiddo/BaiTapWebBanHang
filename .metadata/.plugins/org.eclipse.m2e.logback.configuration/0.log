@@ -8134,3 +8134,5 @@
 2022-05-11 21:37:30,478 [Worker-69: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\kiddo\OneDrive\Desktop\LTWeb\LapTrinhWebsite\src\test\resources
 2022-05-11 21:37:31,486 [Worker-68: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2022-05-11 21:37:31,486 [Worker-68: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\kiddo\OneDrive\Desktop\LTWeb\LapTrinhWebsite\src\main\resources
+2022-05-11 21:37:31,487 [Worker-68: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2022-05-11 21:37:31,487 [Worker-68: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\kiddo\OneDrive\Desktop\LTWeb\LapTrinhWebsite\src\test\resources
