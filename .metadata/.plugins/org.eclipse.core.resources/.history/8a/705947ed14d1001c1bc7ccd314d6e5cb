@@ -1,0 +1,25 @@
+package model;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
+public class History {
+
+	private int id;
+	
+	private int userId;
+	
+	private int status;
+	
+	private Timestamp timecreat;
+	
+	public void fill(ResultSet res) throws SQLException {
+		this.id = res.getInt("id");
+		this.historyId = res.getInt("historyId");
+		this.itemId = res.getInt("itemid");
+		this.price = res.getInt("price");
+		this.size = res.getInt("size");
+		this.quantity = res.getInt("quantity");
+	}
+}

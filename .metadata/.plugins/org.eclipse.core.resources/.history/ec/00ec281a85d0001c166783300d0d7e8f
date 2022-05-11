@@ -1,0 +1,35 @@
+package controller.admin.common;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class PageInfoAdmin {
+
+	private String filePath;
+	
+	private String title;
+	
+	public PageInfoAdmin(String title, String filePath) {
+		this.title = title;
+		this.filePath = filePath;
+	}
+	
+	public void forward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("/admin/layout.jsp");
+		request.setAttribute("PageInfo", this);
+		rd.forward(request, response);
+	}
+	
+	public String getFilePath() {
+		return this.filePath;
+	}
+	
+	public String getTitle() {
+		return this.title;
+	}
+	
+}

@@ -1,0 +1,89 @@
+package model;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
+import io.CartData;
+import io.InfoData;
+
+
+public class Cart {
+
+	private int id;
+	
+	private String hashkey;
+	
+	private String strData;
+
+	private Timestamp timeupdate; 
+	
+	private ArrayList<CartItem> cartItems = new ArrayList<CartItem>();
+	
+	public Cart() {
+		
+	}
+	
+	public Cart(String hashkey) {
+		this.hashkey = hashkey;
+	}
+	
+	public void fill(ResultSet res) throws SQLException {
+		this.id = res.getInt("id");
+		this.hashkey = res.getString("hashkey");
+		this.strData = res.getString("data");
+		this.timeupdate = res.getTimestamp("timeupdate");
+		this.cartItems = CartData.parse(this.strData);
+	}
+
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getHashKey() {
+		return this.hashkey;
+	}
+
+	public void setHashKey(String hashkey) {
+		this.hashkey = hashkey;
+	}
+
+	public Timestamp getTimeupdate() {
+		return timeupdate;
+	}
+
+	public void setTimeupdate(Timestamp timeupdate) {
+		this.timeupdate = timeupdate;
+	}
+	
+	public ArrayList<CartItem> getCartItems() {
+		return this.cartItems;
+	}
+	
+	public void add(CartItem cartItem) {
+		boolean add = true;
+		for (int i = 0; i < this.cartItems.size(); i++) {
+			if (this.cartItems.get(i).getId() == cartItem.getId()) {
+				this.cartItems.get(i).setPrice(cartItem.getPrice());
+				this.cartItems.get(i).setQuantity(cartItem.getQuantity());
+				this.cartItems.get(i).setSize(cartItem.getSize());
+				add = false;
+				break;
+			}
+		}
+		if (add) {
+			this.cartItems.add(cartItem);
+		}
+	}
+}
+

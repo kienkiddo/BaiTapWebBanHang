@@ -1,0 +1,34 @@
+package model;
+
+import io.ItemData;
+
+public class CartItem {
+	private int id;
+	
+	private int cartId;
+	
+	private int itemId;
+	
+	private int price;
+	
+	private int quantity;
+	
+	private int size;
+	
+	private Item item = null;
+	
+	public CartItem() {
+	}
+	
+	public void fill(ResultSet res) {
+		
+	}
+	
+	public Item getItem() {
+		if (item == null) {
+			item = ItemData.withId(id);
+		}
+		return item;
+	}
+	
+}

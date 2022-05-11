@@ -1,0 +1,6 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<form action="admin-dang-nhap" method="post">
+	<input type="text" name="user" placeholder="Email">
+	<input type="password" name="password" placeholder="Mật khẩu>
+	<input type="submit" value="Đăng Nhập">
+</form>

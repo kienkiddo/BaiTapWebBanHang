@@ -1,0 +1,85 @@
+package controller.admin;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import controller.admin.common.AdminPageInfo;
+import io.ItemData;
+import model.Info;
+import model.Item;
+
+/**
+ * Servlet implementation class AdminSearch
+ */
+@WebServlet("/admin/control")
+public class AdminSearch extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public AdminSearch() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
+//	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		ArrayList<Item> items = null;
+		String type = request.getParameter("type");
+		if (type.equals("2")) { // Ton kho
+			items = ItemData.all(0, 2);
+		} else if (type.equals("1")) { // Con hang
+			items = ItemData.all(0, 1);
+			for (Item item : items) {
+				ArrayList<Info> infos = item.getInfos();
+				for (Info info : infos) {
+					if (info.getQuantity() <= 0) {
+						infos.remove(info);
+					}
+				}
+				item.setInfos(infos);
+			}
+		} else if (type.equals("0")) { // het hang
+			items = ItemData.all(0, 1);
+			for (Item item : items) {
+				ArrayList<Info> infos = item.getInfos();
+//				for (Info info : infos) {
+//					if (info.getQuantity() > 0) {
+//						System.out.println(infos);
+//						infos.remove(info);
+//					}
+//				}
+				for (int i = infos.size()-1; i >= 0; i--) {
+					if (infos.get(i).getQuantity() > 0) {
+						infos.remove(i);
+						System.out.println(item.getInfos().get(0).getSize());
+					}
+				}
+				item.setInfos(infos);
+			}
+		}
+		request.setAttribute("items", items);
+		request.setAttribute("type", type);
+		AdminPageInfo page = new AdminPageInfo("Danh sách sản phẩm", "display.jsp");
+		page.forward(request, response);
+	}
+
+}

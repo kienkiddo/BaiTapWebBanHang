@@ -23,15 +23,8 @@ public class ListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		//System.out.println("Size: " + items.size());
-		//request.setAttribute("items", items);
-		//request.setAttribute("type", type);
-		
-		
 		String type = request.getParameter("type");
 		var items = ItemData.all((type.equals("shoes") ? Resource.TYPE_SHOES : Resource.TYPE_SCANDAL), Resource.STATUS_SHOW);
-		//request.setAttribute("items", items);
 		request.setAttribute("data", new Gson().toJson(items));
 		request.setAttribute("colors", ColorData.all());
 		PageInfo page = new PageInfo("Danh sách sản phẩm", "list.jsp");

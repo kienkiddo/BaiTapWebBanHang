@@ -1,0 +1,42 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<c:if test="${type == 0}">
+	<h2>Item hết hàng</h2>
+	 <c:forEach items="${items}" var="item">
+		<p>${item.name}</p>
+		<p>${item.id}</p>
+		<c:if test="${not empty item.infos}">
+			<li>Size: ${info.size}</li>
+		</c:if>
+	</c:forEach>
+</c:if>
+<c:if test="${type == 1 }">
+	<h2>Item còn hàng</h2>
+	${items}
+	 <c:forEach items="${items}" var="item">
+		<p>Id: ${item.id} || Name: ${item.name}</p>
+		<ol>
+			<c:if test="${not empty item.infos}">
+				<c:forEach items="${item.infos}" var="info">
+					<li>Size: ${info.size} Quantity: ${info.quantity}</li>
+				</c:forEach>
+			</c:if>
+		</ol>
+	</c:forEach>
+</c:if>
+<c:if test="${type == 2}">
+	<h2>Item ton kho</h2>
+	<c:forEach items="${items}" var="item">
+		<p>${item.name}</p>
+	</c:forEach>
+</c:if>
+
+</body>
+</html>

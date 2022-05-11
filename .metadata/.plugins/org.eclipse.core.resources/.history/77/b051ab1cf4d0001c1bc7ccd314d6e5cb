@@ -1,0 +1,18 @@
+package io;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+
+import commom.Security;
+import model.Cart;
+import model.User;
+
+public class CartData {
+
+	public static void add(User user, Cart cart) {
+		
+	}
+	
+}

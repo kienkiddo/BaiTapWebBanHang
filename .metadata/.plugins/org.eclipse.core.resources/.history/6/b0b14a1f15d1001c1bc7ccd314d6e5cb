@@ -1,0 +1,63 @@
+package model;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
+public class History {
+
+	private int id;
+	
+	private int userId;
+	
+	private int status;
+	
+	private Timestamp timecreat;
+	
+	private Bill[] bills;
+	
+	public void fill(ResultSet res) throws SQLException {
+		this.id = res.getInt("id");
+		this.userId = res.getInt("userId");
+		this.status = res.getInt("status");
+		this.timecreat = res.getTimestamp("timecreat");
+	}
+	
+	public Bill[] getBills() {
+		
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public Timestamp getTimecreat() {
+		return timecreat;
+	}
+
+	public void setTimecreat(Timestamp timecreat) {
+		this.timecreat = timecreat;
+	}
+	
+	
+}

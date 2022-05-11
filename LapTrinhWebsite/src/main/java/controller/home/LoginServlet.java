@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,13 +40,21 @@ public class LoginServlet extends HttpServlet {
 		}  else {
 			User user = UserData.login(email, Security.getMd5(pass));
 			if (user != null) {
+				HttpServletRequest httpRequest = (HttpServletRequest) request;
+				Cookie[] cookies = httpRequest.getCookies();
+				String hashkey = Security.getHashkey(cookies);
+				if (hashkey != null) {
+					user.setHahskey(hashkey);
+					UserData.updateHashKey(user);
+				}
+				
 				message = "OK";
-				Security.setCookieLogin(email, Security.getMd5(pass), response);
+				Security.setCookieLogin(email, Security.getMd5(pass), user.getHahskey(), response);
+			
 			} else {
 				message = "Thông tin đăng nhập không chính xác";
 			}
 		}
-		
 		response.getWriter().print(message);
 	}
 

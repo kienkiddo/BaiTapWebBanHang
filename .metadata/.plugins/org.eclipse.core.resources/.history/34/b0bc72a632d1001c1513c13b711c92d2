@@ -1,0 +1,38 @@
+package controller.home;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import commom.PageInfo;
+import model.User;
+
+
+@WebServlet("/xac-nhan-don-hang")
+public class ConfirmServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public ConfirmServlet() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		var user = (User) request.getAttribute("user");
+		if (user == null) {
+			System.out.println("null");
+		} else {
+			System.out.println("!= null");
+		}
+		PageInfo page = new PageInfo("Xác nhận đơn hàng", "confirm.jsp");
+		page.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	
+	}
+
+}

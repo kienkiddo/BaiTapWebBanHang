@@ -22,7 +22,7 @@
 					<td>${user.email}</td>
 				</tr>
 				<tr>
-					<th>Phone</th>
+					<th>Số điện thoại:</th>
 					<td>${user.phone}</td>
 				</tr>
 				<tr>

@@ -1,0 +1,12 @@
+package model;
+
+public class History {
+
+	private int id;
+	
+	private int userId;
+	
+	private int status;
+	
+	private Timestamp timecreat;
+}

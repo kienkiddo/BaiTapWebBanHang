@@ -1,0 +1,46 @@
+package controller.home;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import commom.PageInfo;
+import commom.Security;
+import io.ItemData;
+
+/**
+ * Servlet implementation class IndexServlet
+ */
+@WebServlet("/chi-tiet-san-pham")
+public class DetailServlet extends HttpServlet {
+	
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		var item = ItemData.withId(id);
+		if (item != null) {
+			request.setAttribute("item", item);
+			PageInfo page = new PageInfo("Chi tiết sản phẩm", "detail.jsp");
+			page.forward(request, response);
+		} else {
+			PageInfo.page404NotFound(request, response);
+		}
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		var id = Integer.parseInt(request.getParameter("id"));
+		var quantity = Integer.parseInt(request.getParameter("quantity"));
+		int size = Integer.parseInt(request.getParameter("size"));
+		var item = ItemData.withId(id);
+		if (item == null) {
+			return;
+		}
+	}
+
+}

@@ -1,0 +1,11 @@
+package io;
+
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
+import model.Info;
+
+public class InfoData {
+	
+	
+}

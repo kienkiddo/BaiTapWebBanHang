@@ -14,12 +14,31 @@ public class UserData {
 	
 	public static boolean insert(User user) {
 		try {
-			String sql = "INSERT INTO user(id, name, phone, email, password) VALUES(NULL, ?, ?, ?, ?)";
+			String sql = "INSERT INTO user(id, name, phone, email, password, hashkey) VALUES(NULL, ?, ?, ?, ?, ?)";
 			var ps = DBConnect.getConn().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, user.getName());
 			ps.setString(2, user.getPhone());
 			ps.setString(3, user.getEmail());
 			ps.setString(4, Security.getMd5(user.getPassword()));
+			ps.setString(5, user.getHahskey());
+			int row = ps.executeUpdate();
+			ResultSet res = ps.getGeneratedKeys();
+			if (res.next()) {
+				user.setId(res.getInt(1));
+			}
+			return row == 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
+	
+	public static boolean updateHashKey(User user) {
+		try {
+			String sql = "UPDATE user SET hashkey=? WHERE id=?";
+			var ps = DBConnect.getConn().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, user.getHahskey());
+			ps.setInt(2, user.getId());
 			int row = ps.executeUpdate();
 			ResultSet res = ps.getGeneratedKeys();
 			if (res.next()) {

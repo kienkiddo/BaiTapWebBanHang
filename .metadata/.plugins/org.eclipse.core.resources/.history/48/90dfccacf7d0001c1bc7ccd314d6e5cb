@@ -1,0 +1,36 @@
+package io;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
+
+import commom.Security;
+import model.Cart;
+import model.User;
+
+public class CartData {
+
+	
+	
+	public static boolean add(int userId, Cart cart) {
+		try {
+			String sql = "INSERT INTO cart(id, hashkey, data, timeupdate) VALUES(NULL, ?, ?, ?, ?)";
+			var ps = DBConnect.getConn().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			//ps.setString(2, );
+			ps.setString(3, sql);
+			int row = ps.executeUpdate();
+			ResultSet res = ps.getGeneratedKeys();
+			if (res.next()) {
+				cart.setId(res.getInt(1));
+			}
+			return row == 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
+	
+	
+	
+}

@@ -1,0 +1,7 @@
+<body>
+Alo
+<c:if test="${not empty sessionScope.logged}">
+	<a href="/dang-xuat">Đăng xuất</a>
+</c:if>
+</body>
+</html>

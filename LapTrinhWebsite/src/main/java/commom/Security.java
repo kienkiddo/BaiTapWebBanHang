@@ -11,7 +11,6 @@ import model.User;
 
 public class Security {
 	
-
 	public static String getMd5(String s) {
 		try {
 			byte[] bytesOfMessage = s.getBytes("UTF-8");
@@ -29,20 +28,19 @@ public class Security {
 		}
 		return "";
 	}
-	
-	public static String creatHashkey() {
-		return UUID.randomUUID().toString();
-	}
 
 	
-	public static void setCookieLogin(String user, String pass, HttpServletResponse response) {
+	public static void setCookieLogin(String user, String pass, String hashkey, HttpServletResponse response) {
 		Cookie cookie = new Cookie("email", user); 
 		cookie.setMaxAge(60 * 60 * 24 * 90);
 		Cookie cookie2 = new Cookie("pass", pass);
 		cookie2.setMaxAge(60 * 60 * 24 * 90);
+		Cookie cookie3 = new Cookie("hashkey", hashkey);
+		cookie3.setMaxAge(60 * 60 * 24 * 90);
 		
 		response.addCookie(cookie);
 		response.addCookie(cookie2);
+		response.addCookie(cookie3);
 	}
 	
 	public static void deleteCookieLogin(HttpServletResponse response) {
@@ -50,10 +48,18 @@ public class Security {
 		cookie.setMaxAge(0);
 		Cookie cookie2 = new Cookie("pass", "");
 		cookie2.setMaxAge(0);
+		Cookie cookie3 = new Cookie("hashkey", "");
+		cookie3.setMaxAge(0);
 		
 		response.addCookie(cookie);
 		response.addCookie(cookie2);
+		response.addCookie(cookie3);
 	}
+	
+	public static String creatHashkey() {
+		return UUID.randomUUID().toString();
+	}
+
 	
 	public static void setHashkey(String hashkey, HttpServletResponse response) {
 		Cookie cookie = new Cookie("hashkey", hashkey);

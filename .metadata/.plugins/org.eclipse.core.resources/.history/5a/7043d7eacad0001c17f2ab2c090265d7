@@ -1,0 +1,34 @@
+package io;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
+import model.Info;
+import model.Item;
+
+public class InfoData {
+	
+	public static ArrayList<Info> withItemId(int itemId) {
+		ArrayList<Info> infos = new ArrayList<Info>();
+		try {
+			String sql = "SELECT * FROM info WHERE itemId=" + itemId;
+			var ps = DBConnect.getConn().createStatement();
+			ResultSet res = ps.executeQuery(sql);
+			System.out.println(res.getRow());
+			while (res.next()) {
+				Info info = new Info();
+				info.fill(res);
+				infos.add(info);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return infos;
+	}
+	
+	
+}

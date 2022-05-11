@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import commom.PageInfo;
+import commom.Resource;
 import commom.Security;
 import io.ItemData;
 
@@ -17,19 +18,29 @@ import io.ItemData;
  */
 @WebServlet("/chi-tiet-san-pham")
 public class DetailServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		request.setAttribute("item", ItemData.withId(id));
-		PageInfo page = new PageInfo("Chi tiết sản phẩm", "detail.jsp");
-		page.forward(request, response);
+		var item = ItemData.withId(id);
+		if (item != null) {
+			var suggests = ItemData.allSale();
+			if (suggests != null && suggests.size() > 0) {
+				request.setAttribute("suggests", suggests);
+			}
+			request.setAttribute("item", item);
+			PageInfo page = new PageInfo("Chi tiết sản phẩm", "detail.jsp");
+			page.forward(request, response);
+		} else {
+			PageInfo.page404NotFound(request, response);
+		}
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
 	}
 
 }

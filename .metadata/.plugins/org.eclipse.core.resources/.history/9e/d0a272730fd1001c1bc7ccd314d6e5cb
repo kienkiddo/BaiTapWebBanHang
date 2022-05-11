@@ -1,0 +1,28 @@
+package model;
+
+import java.sql.Timestamp;
+import java.sql.ResultSet;
+
+public class Bill {
+	
+	private int id;
+	
+	private int userId;
+	
+	private int itemId;
+	
+	private int price;
+	
+	private int size;
+	
+	private int quantity;
+	
+	private int status;
+	
+	private Timestamp timecreat;
+	
+	public void fill(ResultSet res) {
+		
+	}
+	
+}

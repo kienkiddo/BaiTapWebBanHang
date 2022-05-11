@@ -145,8 +145,8 @@
 			console.log("search price");
 			var prices = [ 200000, 300000, 500000, 100000000 ];
 			for (var i = arr.length - 1; i >= 0; i--) {
-				if (arr[i].price > prices[price]
-						|| (price > 0 && arr[i].price < prices[price - 1])) {
+				if (arr[i].cost > prices[price]
+						|| (price > 0 && arr[i].cost < prices[price - 1])) {
 					arr.splice(i, 1);
 				}
 			}
@@ -193,10 +193,10 @@
 				arr.sort((a,b) => (a.name > b.name) ? -1 : ((b.name > a.name) ? 1 : 0));
 				break;
 			case 2:
-				arr.sort((a,b) => (a.price > b.price) ? -1 : ((b.price > a.price) ? 1 : 0));
+				arr.sort((a,b) => (a.cost > b.cost) ? -1 : ((b.price > a.cost) ? 1 : 0));
 				break;
 			case 3:
-				arr.sort((a,b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0));
+				arr.sort((a,b) => (a.cost > b.cost) ? 1 : ((b.price > a.cost) ? -1 : 0));
 				break;
 			case 4:
 				arr.sort((a,b) => (a.sale > b.sale) ? -1 : ((b.sale > a.sale) ? 1 : 0));
@@ -205,22 +205,27 @@
 				arr.sort((a,b) => (a.isNew) ? -1 : (b.isNew ? 1 : 0));
 				break;
 			}
-		
-
 		}
 		
-
 		index = 0;
 		showPage();
 	}
 
 	function creatHtml(item) {
+		var description = (item.sale > 0 ? "GIẢM " + item.sale + "%" : (item.isNew ? "HÀNG MỚI" : ""));
+		if (description.length > 0){
+			description = '<div class="top-right font-weight-bold text-white bg-danger" style="position: absolute; top: 3px; right: 5px; padding: 2px 8px">' + description +  '</div>';
+		}
+		var priceSource = "";
+		if (item.sale > 0){
+			priceSource = ' <span style="font-size: 15px; text-decoration: line-through" class="font-italic">(' + formatNumber(item.price) +'đ)</span>';
+		}
 		return '<div class="col-md-3 col-6" id="card-item"><a href="chi-tiet-san-pham?id='
 				+ item.id
-				+ '" style="text-decoration: none"> <div class="card mb-3 box-shadow" style="color: black"> <img class="card-img-top mb-4" src="upload/' + item.thump + '" alt=""> <div class="top-right font-weight-bold text-white bg-danger" style="position: absolute; top: 3px; right: 5px; padding: 2px 8px">' + (item.sale > 0 ? "GIẢM " + item.sale + "%" : (item.isNew ? "HÀNG MỚI" : "")) + '</div> <div class="card-body text-center pt-0" style="padding-left: 5px; padding-right: 5px"> <p class="card-text font-weight-bold font-weight-bolder text-warning">'
+				+ '" style="text-decoration: none"> <div class="card mb-3 box-shadow" style="color: black"> <img class="card-img-top mb-4" src="upload/' + item.thump + '" alt=""> ' + description + ' <div class="card-body text-center pt-0" style="padding-left: 5px; padding-right: 5px"> <p class="card-text font-weight-bold font-weight-bolder text-warning">'
 				+ item.name
 				+ '</p> <p>Giá: '
-				+ formatNumber(item.price)
-				+ 'đ</p> </div> </div> </a> </div>';
+				+ formatNumber(item.cost)
+				+ 'đ ' + priceSource + '</p></div> </div> </a> </div>';
 	}
 </script>

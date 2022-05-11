@@ -43,8 +43,17 @@
 							<a class="nav-link a-item" href="danh-sach-san-pham?type=sandal">DÉP</a>
 						</li>
 						<li class="nav-item text-uppercase font-weight-bold li-item">
-							<a class="nav-link a-item" href="gio-hang"><i
-								class="fas fa-cart-arrow-down"></i> Giỏ hàng (3)</a>
+							<a class="nav-link a-item" href="gio-hang" id="giohang"><i
+								class="fas fa-cart-arrow-down"></i> 
+								
+								<c:if test="${empty cart}">
+									Giỏ hàng (<span id="numCart">0</span>)
+								</c:if>
+								<c:if test="${not empty cart}">
+										Giỏ hàng (<span id="numCart">${cart.cartItems.size()}</span>)
+								</c:if>
+								
+							</a>
 						</li>
 					</ul>
 					<c:if test="${empty user}">

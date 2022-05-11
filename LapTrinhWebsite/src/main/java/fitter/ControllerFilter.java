@@ -12,7 +12,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 
+import commom.Security;
+import io.CartData;
 import io.UserData;
+import model.Cart;
 import model.User;
 
 
@@ -46,6 +49,13 @@ public class ControllerFilter extends HttpFilter implements Filter {
 				request.setAttribute("user", user);
 			}
 		}
+		if (Security.getHashkey(cookies) != null) {
+			Cart cart = CartData.withHashkey(Security.getHashkey(cookies));
+			if (cart != null) {
+				request.setAttribute("cart", cart);
+			}
+		}
+
 		chain.doFilter(request, response);
 		
 		

@@ -20,3 +20,30 @@
 1652173990178	Move compilation unit
 1652174237425	Delete element
 1652180196907	Delete element
+1652200642362	Copy file
+1652201195338	Rename resource 'dangnhap.jsp'
+1652201342670	Rename package 'controller.admin'
+1652201418433	Delete element
+1652202668020	Delete element
+1652202688282	Copy file
+1652203048168	Rename type 'PageInfo'
+1652203062991	Rename type 'PageInfoAdmin'
+1652207648744	Rename type 'LogoutServlet'
+1652207661373	Rename type 'ÂdminLogoutServlet'
+1652207817705	Delete element
+1652208043760	Move 'footer.jsp' to 'view'
+1652208046502	Move 'header.jsp' to 'view'
+1652208047841	Move 'index.jsp' to 'view'
+1652208050000	Move 'login.jsp' to 'view'
+1652208052670	Move 'header.jsp' to 'admin'
+1652208055545	Move 'footer.jsp' to 'admin'
+1652211316839	Rename resource 'view.jsp'
+1652264764279	Delete element
+1652279838815	Delete element
+1652279839710	Delete element
+1652279840407	Delete element
+1652279841019	Delete element
+1652279841653	Delete element
+1652279842270	Delete element
+1652279843010	Delete element
+1652279850289	Delete element

@@ -1,7 +1,0 @@
-package DB;
-
-public class UserDB {
-	public static void insert(User user) {
-		
-	}
-}

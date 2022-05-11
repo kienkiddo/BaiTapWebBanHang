@@ -3,6 +3,7 @@ package model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,6 +23,8 @@ public class Item {
 	
 	private int price;
 	
+	private int cost;
+	
 	private String thump;
 	
 	private String strImage;
@@ -36,10 +39,9 @@ public class Item {
 	
 	private boolean isNew;
 
-	private ArrayList<String> images = null;
+	private String[] images = null;
 	
-	private ArrayList<Info> infos = null;
-
+	private Info[] infos = null;
 
 	public Item() {
 		
@@ -58,6 +60,11 @@ public class Item {
 		this.colorId = res.getInt("colorId");
 		this.isNew = res.getBoolean("new");
 		this.sale = res.getInt("sale");
+		if (this.sale > 0) {
+			cost = this.price - this.sale * this.price / 100;;
+		} else {
+			cost = this.price;
+		}
 	}
 	
 	public int getId() {
@@ -84,6 +91,14 @@ public class Item {
 		this.description = description;
 	}
 
+	public int getCost() {
+		return cost;
+	}
+	
+	public void setCost(int cost) {
+		this.cost = cost;
+	}
+	
 	public int getPrice() {
 		return price;
 	}
@@ -92,6 +107,15 @@ public class Item {
 		this.price = price;
 	}
 
+	public int getQuantity(int size) {
+		for (var item : this.getInfos()) {
+			if (item.getSize() == size) {
+				return item.getQuantity();
+			}
+		}
+		return 0;
+	}
+	
 	public String getThump() {
 		return thump;
 	}
@@ -100,27 +124,39 @@ public class Item {
 		this.thump = thump;
 	}
 	
-	public ArrayList<String> getImages(){
+	public String[] getImages(){
 		if (this.images == null) {
 			JSONArray job = (JSONArray) JSONValue.parse(this.strImage);
+			this.images = new String[job.size()];
+			int index = 0;
 			for (var obj : job) {
-				this.images.add(obj.toString());
+				this.images[index++] = obj.toString();
 			}
 		}
 		return this.images;
 	}
 	
-	public ArrayList<Info> getInfos(){
+
+
+	public void setInfos(Info[] infos){
+		this.infos = infos;
+	}
+	
+	public Info[] getInfos(){
 		if (this.infos == null) {
 			JSONArray job = (JSONArray) JSONValue.parse(this.strInfos);
+			this.infos = new Info[job.size()];
+			int index = 0;
 			for (var obj : job) {
 				JSONObject job2 = (JSONObject) obj;
 				Info info = new Info(Integer.parseInt(job2.get("size").toString()), Integer.parseInt(job2.get("quantity").toString()));
-				this.infos.add(info);
+				this.infos[index++] = info;
 			}
+			Arrays.sort(this.infos, (a,b) -> (a.getSize() > b.getSize() ? 1 : -1));
 		}
 		return this.infos;
 	}
+	
 
 	public int getStatus() {
 		return status;

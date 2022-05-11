@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,9 +45,15 @@ public class RegisterServlet extends HttpServlet {
 		} else if (UserData.isEmail(email)) {
 			message = "Email đã tồn tại";
 		} else {
-			if (UserData.insert(new User(name, phone, email, pass))) {
+			HttpServletRequest httpRequest = (HttpServletRequest) request;
+			Cookie[] cookies = httpRequest.getCookies();
+			String hashkey = Security.getHashkey(cookies);
+			if (hashkey == null) {
+				hashkey = Security.creatHashkey();
+			}
+			if (UserData.insert(new User(name, phone, email, pass, hashkey))) {
 				message = "OK";
-				Security.setCookieLogin(email, Security.getMd5(pass), response);
+				Security.setCookieLogin(email, Security.getMd5(pass), hashkey, response);
 			} else {
 				message = "Đã xảy ra lỗi, vui lòng thử lại";
 			}

@@ -1,0 +1,47 @@
+package io;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import model.Bill;
+import model.History;
+import model.Item;
+
+public class BillData {
+	
+	public static boolean insert(Bill bill) {
+		try {
+			String sql = "INSERT INTO bill(id, historyId, itemId, price, size, quantity) VALUES(null, ?, ?, ?, ?, ?)";
+			var ps = DBConnect.getConn().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setInt(1, bill);
+			int row = ps.executeUpdate();
+			ResultSet res = ps.getGeneratedKeys();
+			if (res.next()) {
+				history.setId(res.getInt(1));
+			}
+			return row == 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return false;
+	}
+	
+	public static ArrayList<Bill> withHistoryId(int historyId){
+		ArrayList<Bill> bills = new ArrayList<Bill>();
+		try {
+			String sql = "SELECT * FROM bill WHERE historyId=" + historyId;
+			var ps = DBConnect.getConn().createStatement();
+			ResultSet res = ps.executeQuery(sql);
+			while (res.next()) {
+				Bill bill = new Bill();
+				bill.fill(res);
+				bills.add(bill);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return bills;
+	}
+}
