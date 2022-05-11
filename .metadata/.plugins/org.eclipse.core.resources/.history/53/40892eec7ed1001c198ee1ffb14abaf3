@@ -38,7 +38,7 @@ public class CartData {
 	
 	public static boolean add(Cart cart) {
 		try {
-			String sql = "INSERT INTO cart(id, hashkey, data) VALUES(NULL, ?, '[]')";
+			String sql = "INSERT INTO cart(id, hashkey) VALUES(NULL, ?)";
 			var ps = DBConnect.getConn().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, cart.getHashKey());
 			int row = ps.executeUpdate();

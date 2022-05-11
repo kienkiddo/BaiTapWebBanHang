@@ -75,7 +75,7 @@ public class ItemData {
 
 	public static boolean insert(Item item) {
 		try {
-			String sql = "INSERT INTO item(id, type, name, description, price, colorId, status, infos, image) VALUES(NULL, ?, ?, ?, ?, ?, ?, '[]', '[]')";
+			String sql = "INSERT INTO item(id, type, name, description, price, colorId, status) VALUES(NULL, ?, ?, ?, ?, ?, ?)";
 			var ps = DBConnect.getConn().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, item.getType());
 			ps.setString(2, item.getName());

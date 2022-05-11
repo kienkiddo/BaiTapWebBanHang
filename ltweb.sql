@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 11, 2022 lúc 04:37 PM
+-- Thời gian đã tạo: Th5 12, 2022 lúc 01:07 AM
 -- Phiên bản máy phục vụ: 10.4.24-MariaDB
 -- Phiên bản PHP: 7.4.29
 
@@ -62,7 +62,7 @@ CREATE TABLE `cart` (
   `id` int(11) NOT NULL,
   `hashkey` varchar(255) NOT NULL,
   `timeupdate` timestamp NOT NULL DEFAULT current_timestamp(),
-  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '[]' CHECK (json_valid(`data`))
+  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -135,11 +135,11 @@ CREATE TABLE `item` (
   `price` int(11) NOT NULL,
   `colorId` int(11) NOT NULL,
   `status` int(11) NOT NULL,
-  `new` tinyint(1) NOT NULL,
-  `sale` int(11) NOT NULL,
-  `infos` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '[]',
-  `thump` varchar(255) NOT NULL,
-  `image` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '[]'
+  `new` tinyint(1) NOT NULL DEFAULT 0,
+  `sale` int(11) NOT NULL DEFAULT 0,
+  `infos` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `thump` varchar(255) NOT NULL DEFAULT '',
+  `image` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -175,7 +175,8 @@ INSERT INTO `item` (`id`, `type`, `name`, `description`, `price`, `colorId`, `st
 (26, 0, 'Giày Thể Thao Bé Gái Biti\'s Hunter Junior DSGH00100CAM (Cam)', 'Mô tả của Giày Thể Thao Nam Biti\'s DSGH00100CAM', 360000, 1, 1, 0, 20, '[{\"size\":35,\"quantity\":100},{\"size\":36,\"quantity\":10}]', 'thump-01.jpg', '[\"image-01-01.jpg\",\"image-01-02.jpg\",\"image-01-03.jpg\",\"image-01-04.jpg\"]'),
 (27, 0, 'Giày Thể Thao Bé Gái Biti\'s Hunter Junior DSGH00100CAM (Cam)', 'Mô tả của Giày Thể Thao Nam Biti\'s DSGH00100CAM', 370000, 1, 1, 0, 20, '[{\"size\":35,\"quantity\":100},{\"size\":36,\"quantity\":10}]', 'thump-01.jpg', '[\"image-01-01.jpg\",\"image-01-02.jpg\",\"image-01-03.jpg\",\"image-01-04.jpg\"]'),
 (28, 0, 'Giày Thể Thao Bé Gái Biti\'s Hunter Junior DSGH00100CAM (Cam)', 'Mô tả của Giày Thể Thao Nam Biti\'s DSGH00100CAM', 380000, 1, 1, 0, 20, '[{\"size\":35,\"quantity\":100},{\"size\":36,\"quantity\":10}]', 'thump-01.jpg', '[\"image-01-01.jpg\",\"image-01-02.jpg\",\"image-01-03.jpg\",\"image-01-04.jpg\"]'),
-(29, 0, 'Giày Thể Thao Bé Gái Biti\'s Hunter Junior DSGH00100CAM (Cam)', 'Mô tả của Giày Thể Thao Nam Biti\'s DSGH00100CAM', 390000, 1, 1, 0, 20, '[{\"size\":35,\"quantity\":100},{\"size\":36,\"quantity\":10}]', 'thump-01.jpg', '[\"image-01-01.jpg\",\"image-01-02.jpg\",\"image-01-03.jpg\",\"image-01-04.jpg\"]');
+(29, 0, 'Giày Thể Thao Bé Gái Biti\'s Hunter Junior DSGH00100CAM (Cam)', 'Mô tả của Giày Thể Thao Nam Biti\'s DSGH00100CAM', 390000, 1, 1, 0, 20, '[{\"size\":35,\"quantity\":100},{\"size\":36,\"quantity\":10}]', 'thump-01.jpg', '[\"image-01-01.jpg\",\"image-01-02.jpg\",\"image-01-03.jpg\",\"image-01-04.jpg\"]'),
+(39, 0, 'Tên sản phẩm:', 'Mô tả:', 20000, 1, 0, 0, 0, '[]', '39_thump_20220512_054813.jpg', '[\"39_image_0_20220512_054813.jpg\",\"39_image_1_20220512_054813.jpg\",\"39_image_2_20220512_054813.jpg\"]');
 
 -- --------------------------------------------------------
 
@@ -275,7 +276,7 @@ ALTER TABLE `history`
 -- AUTO_INCREMENT cho bảng `item`
 --
 ALTER TABLE `item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
