@@ -27,6 +27,7 @@ public class AdminFilter extends HttpFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+		/*
 		HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
         HttpSession session = request.getSession();
@@ -36,6 +37,8 @@ public class AdminFilter extends HttpFilter implements Filter {
         } else {
         	response.sendRedirect("admin-dang-nhap");
         }
+        */
+		chain.doFilter(req, res);
 		
 	}
 

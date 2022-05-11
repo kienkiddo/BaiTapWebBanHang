@@ -47,6 +47,15 @@ public class Item {
 		
 	}
 	
+	public Item (int type, String name, String description, int price, int colorId, int status) {
+		this.type = type;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.colorId = colorId;
+		this.status = status;
+	}
+	
 	public void fill(ResultSet res) throws SQLException {
 		this.id = res.getInt("id");
 		this.type = res.getInt("type");
@@ -135,8 +144,6 @@ public class Item {
 		}
 		return this.images;
 	}
-	
-
 
 	public void setInfos(Info[] infos){
 		this.infos = infos;
@@ -197,7 +204,13 @@ public class Item {
 	public void setSale(int sale) {
 		this.sale = sale;
 	}
-	
-	
+
+	public String getStrImage() {
+		return strImage;
+	}
+
+	public void setStrImage(String strImage) {
+		this.strImage = strImage;
+	}
 	
 }

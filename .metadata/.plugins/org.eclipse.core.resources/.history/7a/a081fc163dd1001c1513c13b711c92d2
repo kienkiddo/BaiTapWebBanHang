@@ -1,0 +1,73 @@
+<?php
+
+
+$titles = array("Thống kê chung", "Danh sách nick", "Upload nick", "Rút tiền", "Bảng xếp hạng", "Lịch sử");
+$controllers = array("dashboard", "danh-sach-nick", "upload", "rut-tien", "bang-xep-hang", "lich-su");
+
+$header = '<div class="userHeader" style="font-family: "Roboto";"><div style="border-left: 7px solid rgb(3, 133, 219); padding-left: 7px; margin-bottom: 25px"><h5 style="padding-left: 15px;">MENU CHỨC NĂNG</h5></div>
+  <div> <ul style="list-style-type: none; padding-left: 0px">';
+
+for ($i = 0; $i < count($titles); $i++) {
+  $color = "inherit";
+  if ($i == $index - 1) {
+    $color = "rgb(3, 133, 219)";
+  }
+  $header .= '<li><i class="fas fa-square" style="color: rgb(3, 133, 219); margin-right: 10px; font-size: 10px"></i> <a href="' . $domain . '?q=' . $controllers[$i] . '" style="color: ' . $color . '">' . $titles[$i] . '</a></li>';
+}
+
+$header .= "</ul></div></div>";
+
+?>
+
+<style>
+  @media (min-width: 1199.98px) {
+    .col-lg-3 {
+      padding-right: 0px;
+    }
+
+    .col-lg-9 {
+      padding-left: 10px;
+    }
+  }
+
+  @media (max-width: 1199.98px) {
+    .col-lg-9 {
+      margin-top: 25px;
+    }
+  }
+
+  .userHeader li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f2f2f2;
+  }
+
+  .userHeader_Title {
+    margin-bottom: 0px;
+  }
+
+  .userHeader_Gach {
+    background-color: rgb(3, 133, 219);
+    height: 2px;
+    width: 50px;
+    text-align: left;
+    display: inline-block;
+  }
+
+  #th_dmk:hover {
+    cursor: pointer;
+  }
+
+  #userBody {
+    margin-top: 35px;
+  }
+
+
+  td {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    white-space: nowrap;
+  }
+</style>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script></html>

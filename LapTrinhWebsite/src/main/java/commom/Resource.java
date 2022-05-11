@@ -12,4 +12,5 @@ public class Resource {
 	
 	public static final int STATUS_SHOW = 1;
 
+	public static final String folderUpload = "C:\\Users\\kiddo\\OneDrive\\Desktop\\LTWeb\\LapTrinhWebsite\\src\\main\\webapp\\upload";
 }

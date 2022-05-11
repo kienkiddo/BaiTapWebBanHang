@@ -17,7 +17,7 @@ public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PageInfo page = new PageInfo("Home", "index.jsp");
+		PageInfo page = new PageInfo("Trang chủ", "index.jsp");
 		page.forward(request, response);
 	
 	}

@@ -1,0 +1,21 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+<div class="col-lg-9">
+	<h4 class="userHeader_Title">THÊM VẬT PHẨM</h4>
+	<hr class="userHeader_Gach">
+	<div class="row">
+		<div class="col">
+			<form id="form">
+				<div class="form-groupp">
+					<label>Loại sản phẩm: </label>
+					<select name="type" id="type" class="form-control">
+						<option value="0">Giày</option>
+						<option value="1">Dép</option>
+					</select>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

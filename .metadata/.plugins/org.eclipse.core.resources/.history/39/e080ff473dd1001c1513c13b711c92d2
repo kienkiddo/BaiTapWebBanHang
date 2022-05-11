@@ -1,0 +1,175 @@
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<div class="container" id="userBody">
+  <div class="row" style="margin-top: 30px;">
+    <div class="col-lg-3">
+<style>
+  @media (min-width: 1199.98px) {
+    .col-lg-3 {
+      padding-right: 0px;
+    }
+
+    .col-lg-9 {
+      padding-left: 10px;
+    }
+  }
+
+  @media (max-width: 1199.98px) {
+    .col-lg-9 {
+      margin-top: 25px;
+    }
+  }
+
+  .userHeader li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f2f2f2;
+  }
+
+  .userHeader_Title {
+    margin-bottom: 0px;
+  }
+
+  .userHeader_Gach {
+    background-color: rgb(3, 133, 219);
+    height: 2px;
+    width: 50px;
+    text-align: left;
+    display: inline-block;
+  }
+
+  #th_dmk:hover {
+    cursor: pointer;
+  }
+
+  #userBody {
+    margin-top: 35px;
+  }
+
+
+  td {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    white-space: nowrap;
+  }
+</style>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script><div class="userHeader" style="font-family: " roboto";"=""><div style="border-left: 7px solid rgb(3, 133, 219); padding-left: 7px; margin-bottom: 25px"><h5 style="padding-left: 15px;">MENU CHỨC NĂNG</h5></div>
+  <div> <ul style="list-style-type: none; padding-left: 0px"><li><i class="fas fa-square" style="color: rgb(3, 133, 219); margin-right: 10px; font-size: 10px"></i> <a href="?q=dashboard" style="color: rgb(3, 133, 219)">Thống kê chung</a></li><li><i class="fas fa-square" style="color: rgb(3, 133, 219); margin-right: 10px; font-size: 10px"></i> <a href="?q=danh-sach-nick" style="color: inherit">Danh sách nick</a></li><li><i class="fas fa-square" style="color: rgb(3, 133, 219); margin-right: 10px; font-size: 10px"></i> <a href="?q=upload" style="color: inherit">Upload nick</a></li><li><i class="fas fa-square" style="color: rgb(3, 133, 219); margin-right: 10px; font-size: 10px"></i> <a href="?q=rut-tien" style="color: inherit">Rút tiền</a></li><li><i class="fas fa-square" style="color: rgb(3, 133, 219); margin-right: 10px; font-size: 10px"></i> <a href="?q=bang-xep-hang" style="color: inherit">Bảng xếp hạng</a></li><li><i class="fas fa-square" style="color: rgb(3, 133, 219); margin-right: 10px; font-size: 10px"></i> <a href="?q=lich-su" style="color: inherit">Lịch sử</a></li></ul></div></div>    </div>
+    <div class="col-lg-9">
+      <h4 class="userHeader_Title">THỐNG KÊ CHUNG</h4>
+      <hr class="userHeader_Gach">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="card border-primary mb-3">
+            <div class="card-body text-primary">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title mb-0"><span class="fas fa-coins"></span> Số dư: 0đ</h5>
+                  <small>(Doanh thu +0đ hôm nay)</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card border-primary mb-3">
+            <div class="card-body text-primary">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title  mb-0"><span class="fas fa-users"></span> Nick đang bán: 0</h5>
+                  <small>(Đã bán 0 nick hôm nay)</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive mt-2">
+        <table class="table text-center">
+          <thead class="bg bg-primary text-white">
+            <tr>
+              <th scope="col">Thời gian</th>
+              <th scope="col">User</th>
+              <th scope="col">Nội dung</th>
+              <th scope="col">Giá nick</th>
+            </tr>
+          </thead>
+          <tbody>
+                          <tr>
+                <td>2022/05/11 22:01</td>
+                <td>Nguyễn Hoàng Khoa</td>
+                <td>Bán nick mã số #45442</td>
+                <td><span class="badge badge-success p-2">+200,000đ</span></td>
+              </tr>
+
+                          <tr>
+                <td>2022/05/11 21:02</td>
+                <td>Nguyễn Bá Biên</td>
+                <td>Bán nick mã số #44678</td>
+                <td><span class="badge badge-success p-2">+19,999đ</span></td>
+              </tr>
+
+                          <tr>
+                <td>2022/05/11 20:49</td>
+                <td>Nguyễn Quốc</td>
+                <td>Bán nick mã số #45422</td>
+                <td><span class="badge badge-success p-2">+90,000đ</span></td>
+              </tr>
+
+                          <tr>
+                <td>2022/05/11 20:29</td>
+                <td>Nguyễn Bá Biên</td>
+                <td>Bán nick mã số #45367</td>
+                <td><span class="badge badge-success p-2">+169,999đ</span></td>
+              </tr>
+
+                          <tr>
+                <td>2022/05/11 20:13</td>
+                <td>Nguyễn Bá Biên</td>
+                <td>Bán nick mã số #44673</td>
+                <td><span class="badge badge-success p-2">+19,999đ</span></td>
+              </tr>
+
+                          <tr>
+                <td>2022/05/11 20:10</td>
+                <td>Nguyễn Quốc</td>
+                <td>Bán nick mã số #45485</td>
+                <td><span class="badge badge-success p-2">+150,000đ</span></td>
+              </tr>
+
+                          <tr>
+                <td>2022/05/11 19:38</td>
+                <td>Nguyễn Hoàng Khoa</td>
+                <td>Bán nick mã số #45474</td>
+                <td><span class="badge badge-success p-2">+300,000đ</span></td>
+              </tr>
+
+                          <tr>
+                <td>2022/05/11 16:32</td>
+                <td>Phạm Trí</td>
+                <td>Bán nick mã số #45390</td>
+                <td><span class="badge badge-success p-2">+50,000đ</span></td>
+              </tr>
+
+                          <tr>
+                <td>2022/05/11 13:16</td>
+                <td>Phạm Trí</td>
+                <td>Bán nick mã số #45475</td>
+                <td><span class="badge badge-success p-2">+110,000đ</span></td>
+              </tr>
+
+                          <tr>
+                <td>2022/05/11 11:29</td>
+                <td>Nguyễn Hoàng Khoa</td>
+                <td>Bán nick mã số #45470</td>
+                <td><span class="badge badge-success p-2">+100,000đ</span></td>
+              </tr>
+
+                      </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
