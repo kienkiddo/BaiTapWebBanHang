@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import commom.Security;
 import io.CartData;
@@ -31,6 +32,7 @@ public class ControllerFilter extends HttpFilter implements Filter {
 
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		Cookie[] cookies = httpRequest.getCookies();
 		String email = null, pass = null;
@@ -47,6 +49,8 @@ public class ControllerFilter extends HttpFilter implements Filter {
 			User user = UserData.login(email, pass);
 			if (user != null) {
 				request.setAttribute("user", user);
+				HttpSession session = httpRequest.getSession();
+				session.setAttribute("user", user);
 			}
 		}
 		if (Security.getHashkey(cookies) != null) {

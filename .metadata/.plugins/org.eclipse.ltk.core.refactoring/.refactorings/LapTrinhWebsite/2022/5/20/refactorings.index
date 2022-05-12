@@ -52,3 +52,9 @@
 1652281295327	Copy file
 1652281483935	Copy compilation unit
 1652305581646	Rename type 'JUtil'
+1652313848243	Rename resource 'detail.jsp'
+1652313863516	Rename type 'DetailServlet'
+1652315789175	Rename type 'EditServlet'
+1652315811358	Rename resource 'edit.jsp'
+1652336857774	Delete element
+1652336867450	Delete element

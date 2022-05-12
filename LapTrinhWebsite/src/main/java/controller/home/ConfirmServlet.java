@@ -31,6 +31,12 @@ public class ConfirmServlet extends HttpServlet {
 			PageInfo page = new PageInfo("Đăng nhập", "login.jsp");
 			page.forward(request, response);
 		} else {
+			String address = "";
+			var history = HistoryData.withLast(user.getId());
+			if (history != null) {
+				address = history.getAddress();
+			}
+			request.setAttribute("address", address);
 			PageInfo page = new PageInfo("Xác nhận đơn hàng", "confirm.jsp");
 			page.forward(request, response);
 		}
@@ -75,7 +81,7 @@ public class ConfirmServlet extends HttpServlet {
 			cart.getCartItems().clear();
 			CartData.update(cart);
 			
-			response.sendRedirect("dat-hang-thanh-cong");
+			response.sendRedirect("don-hang?id=" + history.getId());
 		}
 	}
 

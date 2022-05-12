@@ -3,18 +3,26 @@
 
 
 <div class="col-lg-9">
-	<h4 class="userHeader_Title">THÊM VẬT PHẨM</h4>
+	<h4 class="userHeader_Title">THÊM SẢN PHẨM</h4>
 	<hr class="userHeader_Gach">
 	<div class="row">
 		<div class="col">
-			<p>${mé }</p>
-			<form id="form" action="addItem" method="POST" enctype="multipart/form-data">
+			<p style="color: red">${message}</p>
+			<form id="form" action="addItem" method="POST"
+				enctype="multipart/form-data">
 				<div class="form-group">
 					<label>Loại sản phẩm: </label> <select name="type" id="type"
 						class="form-control">
 						<option value="-1">Chọn loại sản phẩm</option>
 						<option value="0">Giày</option>
 						<option value="1">Dép</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Tình trạng: </label> <select name="isNew" id="isNew"
+						class="form-control">
+						<option value="1">Hàng mới</option>
+						<option value="0">Hàng bình thường</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -37,6 +45,10 @@
 				<div class="form-group">
 					<label>Giá:</label> <input class="form-control" type="number"
 						id="price" name="price">
+				</div>
+				<div class="form-group">
+					<label>Giảm: (%)</label> <input class="form-control" type="number"
+						id="sale" name="sale" value="0">
 				</div>
 				<div class="form-group">
 					<label>Thump:</label> <input type="file" name="thump" id="thump" />

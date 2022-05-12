@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <style>
 @media ( min-width : 1199.98px) {
 	.col-lg-3 {
@@ -66,12 +69,21 @@ td {
 					<ul style="list-style-type: none; padding-left: 0px">
 						<li><i class="fas fa-square"
 							style="color: rgb(3, 133, 219); margin-right: 10px; font-size: 10px"></i>
-							<a href="?q=dashboard" style="color: inherit">Thống kế chung</a></li>
+							<a href="<c:url value='/admin'/>" style="color: inherit">Thống
+								kê chung</a></li>
 						<li><i class="fas fa-square"
 							style="color: rgb(3, 133, 219); margin-right: 10px; font-size: 10px"></i>
-							<a href="admin/addItem" style="color: inherit">Thêm sản phẩm</a></li>
+							<a href="<c:url value='/admin/bill'/>" style="color: inherit">Đơn hàng</a></li>
+						<li><i class="fas fa-square"
+							style="color: rgb(3, 133, 219); margin-right: 10px; font-size: 10px"></i>
+							<a href="<c:url value='/admin/view'/>" style="color: inherit">Danh
+								sách sản phẩm</a></li>
+						<li><i class="fas fa-square"
+							style="color: rgb(3, 133, 219); margin-right: 10px; font-size: 10px"></i>
+							<a href="<c:url value='/admin/addItem'/>" style="color: inherit">Thêm
+								sản phẩm</a></li>
+
 					</ul>
 				</div>
 			</div>
 		</div>
-

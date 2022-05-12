@@ -26,7 +26,7 @@ public class DetailServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		var item = ItemData.withId(id);
 		if (item != null) {
-			var suggests = ItemData.allSale();
+			var suggests = ItemData.suggest();
 			if (suggests != null && suggests.size() > 0) {
 				request.setAttribute("suggests", suggests);
 			}

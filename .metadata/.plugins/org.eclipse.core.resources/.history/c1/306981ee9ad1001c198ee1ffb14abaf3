@@ -1,0 +1,47 @@
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<style>
+th, td {
+	font-size: 15px;
+	padding: 3px 5px !important;
+}
+</style>
+<div class="col-lg-9">
+	<h4 class="userHeader_Title">CHI TIẾT ĐƠN HÀNG</h4>
+	<hr class="userHeader_Gach">
+	<div class="row">
+		<div class="col">
+			<table>
+				<tbody>
+					<tr>
+						<td>Thời gian tạo:</td>
+						<td>${history.timecreat}</td>
+					</tr>
+					<tr>
+						<td>Họ tên:</td>
+						<td>${history.name}</td>
+					</tr>
+					<tr>
+						<td>Số điện thoại:</td>
+						<td>${history.phone}</td>
+					</tr>
+					<tr>
+						<td>Địa chỉ:</td>
+						<td>${history.address}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+	$(document).ready(function() {
+		$("#table").DataTable({
+			"order" : [ [ 0, "desc" ] ]
+		});
+	});
+</script>

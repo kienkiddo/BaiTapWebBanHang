@@ -98,4 +98,12 @@ public class History {
 		this.phone = phone;
 	}
 	
+	public int getPrice() {
+		int price = 0;
+		for (var bill : this.getBills()) {
+			price += bill.getPrice() * bill.getQuantity();
+		}
+		return price;
+	}
+	
 }

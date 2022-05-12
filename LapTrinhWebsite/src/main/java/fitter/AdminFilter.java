@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import commom.PageInfo;
+import model.User;
+
 
 @WebFilter("/admin/*")
 public class AdminFilter extends HttpFilter implements Filter {
@@ -38,8 +41,15 @@ public class AdminFilter extends HttpFilter implements Filter {
         	response.sendRedirect("admin-dang-nhap");
         }
         */
-		chain.doFilter(req, res);
-		
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
+		if (user == null || user.getLevel() == 0) {
+	        HttpServletResponse response = (HttpServletResponse) res;
+	        PageInfo.page404NotFound(request, response);
+		}  else {
+			chain.doFilter(req, res);
+		}
 	}
 
 	public void init(FilterConfig fConfig) throws ServletException {

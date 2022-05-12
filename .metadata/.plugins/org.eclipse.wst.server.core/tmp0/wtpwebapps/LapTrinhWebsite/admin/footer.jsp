@@ -12,7 +12,14 @@
 </footer>
 </body>
 
+<c:if test="${ sessionScope.message != null }">
+	<script>
+		$.notify("<c:out value='${sessionScope.message}' />", {
+			className : "info"
+		});
+	</script>
+	<c:remove var="message" scope="session" />
+</c:if>
 <script
 	src="<c:url value='/home/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
-	<script
-	src="<c:url value='/home/assets/main.js'/>"></script>
+<script src="<c:url value='/home/assets/main.js'/>"></script>

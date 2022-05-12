@@ -52,14 +52,15 @@ public class AddItemServlet extends HttpServlet {
 		// request.getServletContext().getRealPath("/resources/images/");
 		// String applicationPath = request.getServletContext().getRealPath("");
 		request.setCharacterEncoding("UTF-8");
-
 		int type = Integer.parseInt(request.getParameter("type"));
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
 		int color = Integer.parseInt(request.getParameter("color"));
 		int price = (request.getParameter("price").length() == 0 ? -1
 				: Integer.parseInt(request.getParameter("price")));
-
+		int isNew = Integer.parseInt(request.getParameter("isNew"));
+		int sale = Integer.parseInt(request.getParameter("sale"));
+		
 		String message = "";
 		if (type < 0 || type > 1) {
 			message = "Vui lòng chọn sản phẩm";
@@ -71,32 +72,34 @@ public class AddItemServlet extends HttpServlet {
 			message = "Vui lòng chọn màu sắc";
 		} else if (price < 0) {
 			message = "Giá tiền không thể là số âm";
+		} else if (sale < 0 || sale > 100) {
+			message = "Giảm giá % phải từ 0 đến 100";
 		} else {
-			Item item = new Item(type, name, description, price, color, Resource.STATUS_HIDDEN);
+			Item item = new Item(type, name, description, price, color, Resource.STATUS_HIDDEN, (isNew == 1 ? true : false), sale);
 			if (ItemData.insert(item)) {
 				Part thump = null;
 				ArrayList<Part> images = new ArrayList<Part>();
 				for (Part part : request.getParts()) {
-					if (part.getName().equals("images")) {
+					if (part.getName().equals("images") && part.getSize() > 0) {
 						images.add(part);
-					} else if (part.getName().equals("thump")) {
+					} else if (part.getName().equals("thump") && part.getSize() > 0) {
 						thump = part;
 					}
 				}
 				String strThump = "";
 				if (thump != null) {
 					strThump = item.getId() + "_thump_" + Util.getTime("yyyyMMdd_HHmmss") + ".jpg";
-					this.saveFile(thump, strThump);
+					Util.saveFile(thump, strThump);
 				}
 				JSONArray job = new JSONArray();
 				int index = 0;
 				for (var image : images) {
 					var nameImage = item.getId() + "_image_" + (index++) + "_" + Util.getTime("yyyyMMdd_HHmmss") + ".jpg";
-					this.saveFile(image, nameImage);
+					Util.saveFile(image, nameImage);
 					job.add(nameImage);
 				}
 				ItemData.updateImage(item, job.toJSONString(), strThump);
-				message = "Thành công";
+				message = "Thêm sản phẩm thành công</br>Mã sản phẩm: <span class='text-danger'>#" + item.getId() + "</span></br><a href='../chi-tiet-san-pham?id=" + item.getId() + "' target='_blank'>Link sản phẩm</a>";
 			} else {
 				message = "Đã xảy ra lỗi, vui lòng liên hệ Admin";
 			}
@@ -105,23 +108,6 @@ public class AddItemServlet extends HttpServlet {
 		this.doGet(request, response);
 	}
 
-	private void saveFile(Part part, String name) {
-		File file = new File(Resource.folderUpload + "\\" + name);
-		try (OutputStream outputStream = new FileOutputStream(file)) {
-			IOUtils.copy(part.getInputStream(), outputStream);
-		} catch (Exception e) {
-		}
-	}
-
-	private String getFileName(Part part) {
-		String contentDisp = part.getHeader("content-disposition");
-		String[] tokens = contentDisp.split(";");
-		for (String token : tokens) {
-			if (token.trim().startsWith("filename")) {
-				return token.substring(token.indexOf("=") + 2, token.length() - 1);
-			}
-		}
-		return "";
-	}
+	
 
 }

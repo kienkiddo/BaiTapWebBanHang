@@ -1,0 +1,116 @@
+package controller.admin;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.json.simple.JSONArray;
+
+import commom.PageInfo;
+import commom.Resource;
+import commom.Util;
+import io.ColorData;
+import io.ItemData;
+import model.Item;
+
+@WebServlet(urlPatterns = { "/admin/editItem" })
+
+public class EditItemServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		var item = ItemData.withId(id);
+		if (item != null) {
+			request.setAttribute("colors", ColorData.all());
+			request.setAttribute("item", item);
+			PageInfo page = new PageInfo("Chỉnh sửa sản phầm", "editItem.jsp");
+			page.setAdmin();
+			page.forward(request, response);
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		int type = Integer.parseInt(request.getParameter("type"));
+		String name = request.getParameter("name");
+		String description = request.getParameter("description");
+		int color = Integer.parseInt(request.getParameter("color"));
+		int price = (request.getParameter("price").length() == 0 ? -1
+				: Integer.parseInt(request.getParameter("price")));
+		
+		String message = "";
+		if (type < 0 || type > 1) {
+			message = "Vui lòng chọn sản phẩm";
+		} else if (name.length() < 6 || name.length() > 255) {
+			message = "Tên sản phẩm phải từ 6 đến 256 kí tự";
+		} else if (description.length() > 1024) {
+			message = "Mô tả phải nhỏ hơn 1024 kí tự";
+		} else if (color == -1) {
+			message = "Vui lòng chọn màu sắc";
+		} else if (price < 0) {
+			message = "Giá tiền không thể là số âm";
+		} else {
+			
+			var item = ItemData.withId(id);
+			if (item == null) {
+				message = "Sản phẩm không tồn tại";
+			} else {
+				item.setType(type);
+				item.setName(name);
+				item.setDescription(description);
+				item.setColorId(color);
+				item.setPrice(price);
+				ItemData.updateItem(item);
+				Part thump = null;
+				ArrayList<Part> images = new ArrayList<Part>();
+				for (Part part : request.getParts()) {
+					if (part.getName().equals("images")) {
+						images.add(part);
+					} else if (part.getName().equals("thump")) {
+						thump = part;
+					}
+				}
+				String strThump = "";
+				if (thump != null) {
+					strThump = item.getId() + "_thump_" + Util.getTime("yyyyMMdd_HHmmss") + ".jpg";
+					Util.saveFile(thump, strThump);
+				}
+				String image = "";
+				JSONArray job = new JSONArray();
+				int index = 0;
+				for (var i : images) {
+					var nameImage = item.getId() + "_image_" + (index++) + "_" + Util.getTime("yyyyMMdd_HHmmss") + ".jpg";
+					Util.saveFile(i, nameImage);
+					job.add(nameImage);
+				}
+				image = job.toJSONString();
+				if (strThump == "") {
+					strThump = item.getThump();
+				}
+				if (job.size() == 0) {
+					image = item.getStrImage();
+				}
+				ItemData.updateImage(item, image , strThump);
+				message = "Chỉnh sửa thành công";
+			}
+		}
+
+		Util.addNotify(request, message);
+		response.sendRedirect("admin/view");
+		
+
+	}
+
+}

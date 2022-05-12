@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <style>
 .img-small {
@@ -48,51 +48,57 @@
 				</p>
 
 				<hr>
-				<div class="row">
-					<div class="col-10">
-						<div class="form-inline">
-							<label>Kích thước: &ensp;</label> <select class="form-control"
-								id="size">
-								<option value="-1" selected>Chọn size</option>
-								<c:forEach items="${item.infos}" var="info">
-									<c:if test="${info.quantity > 0}">
-										<option value="${info.size}" data-quantity="${info.quantity}">${info.size}</option>
-									</c:if>
-								</c:forEach>
+				<c:if test="${!item.isEmpty}">
+					<div class="row">
+						<div class="col-10">
+							<div class="form-inline">
+								<label>Kích thước: &ensp;</label> <select class="form-control"
+									id="size">
+									<option value="-1" selected>Chọn size</option>
+									<c:forEach items="${item.infos}" var="info">
+										<c:if test="${info.quantity > 0}">
+											<option value="${info.size}" data-quantity="${info.quantity}">${info.size}</option>
+										</c:if>
+									</c:forEach>
 
-							</select> <small style="display: none" id="divQuantity"
-								class="font-italic">&ensp; Còn <span id="quantityEnd"
-								class="font-weight-bold"></span> sản phẩm
-							</small>
+								</select> <small style="display: none" id="divQuantity"
+									class="font-italic">&ensp; Còn <span id="quantityEnd"
+									class="font-weight-bold"></span> sản phẩm
+								</small>
+							</div>
 						</div>
 					</div>
-				</div>
-
-
-				<div class="row mt-3">
-					<div class="col-10">
-						<div class="form-inline">
-							<label>Số lượng: &ensp;</label> <input type="number"
-								class="form-control" value="1" id="quantity">
+					<div class="row mt-3">
+						<div class="col-10">
+							<div class="form-inline">
+								<label>Số lượng: &ensp;</label> <input type="number"
+									class="form-control" value="1" id="quantity">
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row mt-4">
-					<div class="col">
-						<button class="form-control btn-primary btn-sm font-weight-bold"
-							onclick="addCart()" id="btn">
-							<i class="fas fa-cart-arrow-down"></i> MUA NGAY
-						</button>
+					<div class="row mt-4">
+						<div class="col">
+							<button class="form-control btn-primary btn-sm font-weight-bold"
+								onclick="addCart()" id="btn">
+								<i class="fas fa-cart-arrow-down"></i> MUA NGAY
+							</button>
+						</div>
 					</div>
-				</div>
-				<hr>
+					<hr>
+
+				</c:if>
+				<c:if test="${item.isEmpty}">
+					<p class="text-danger font-weight-bold">TẠM HẾT HÀNG</p>
+					<hr>
+				</c:if>
 
 				<c:if test="${not empty suggests}">
 					<p>Có thể bạn sẽ thích</p>
 					<div class="row mt-2">
 						<c:forEach items="${suggests}" var="item">
 							<div class="col-md-4 col-6" id="card-item">
-								<a href="chi-tiet-san-pham?id=${item.id}" style="text-decoration: none">
+								<a href="chi-tiet-san-pham?id=${item.id}"
+									style="text-decoration: none">
 									<div class="card mb-3 box-shadow" style="color: black">
 										<img class="card-img-top" src="upload/${item.thump}" alt="">
 										<div class="top-right font-weight-bold text-white bg-danger"

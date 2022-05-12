@@ -1,0 +1,253 @@
+package io;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import commom.Security;
+import model.Cart;
+import model.Info;
+import model.Item;
+import model.User;
+
+public class ItemData {
+
+	public static ArrayList<Item> suggest() {
+		ArrayList<Item> items = new ArrayList<Item>();
+		try {
+			String sql = "SELECT * FROM item WHERE status=1 and sale > 0 ORDER BY rand() LIMIT 3";
+			var ps = DBConnect.getConn().createStatement();
+			ResultSet res = ps.executeQuery(sql);
+			while (res.next()) {
+				Item item = new Item();
+				item.fill(res);
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
+	
+	public static ArrayList<Item> allSale() {
+		ArrayList<Item> items = new ArrayList<Item>();
+		try {
+			String sql = "SELECT * FROM item WHERE status=1 and sale > 0";
+			var ps = DBConnect.getConn().createStatement();
+			ResultSet res = ps.executeQuery(sql);
+			while (res.next()) {
+				Item item = new Item();
+				item.fill(res);
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
+	
+	
+	public static ArrayList<Item> hotSale() {
+		ArrayList<Item> items = new ArrayList<Item>();
+		try {
+			String sql = "SELECT * FROM item WHERE status=1 ORDER BY sale DESC LIMIT 8";
+			var ps = DBConnect.getConn().createStatement();
+			ResultSet res = ps.executeQuery(sql);
+			while (res.next()) {
+				Item item = new Item();
+				item.fill(res);
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
+	
+	public static ArrayList<Item> hotNew() {
+		ArrayList<Item> items = new ArrayList<Item>();
+		try {
+			String sql = "SELECT * FROM item WHERE status=1 ORDER BY new DESC LIMIT 8";
+			var ps = DBConnect.getConn().createStatement();
+			ResultSet res = ps.executeQuery(sql);
+			while (res.next()) {
+				Item item = new Item();
+				item.fill(res);
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
+	
+	public static ArrayList<Item> allNew() {
+		ArrayList<Item> items = new ArrayList<Item>();
+		try {
+			String sql = "SELECT * FROM item WHERE new";
+			var ps = DBConnect.getConn().createStatement();
+			ResultSet res = ps.executeQuery(sql);
+			while (res.next()) {
+				Item item = new Item();
+				item.fill(res);
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
+
+	public static ArrayList<Item> all(int type, int status) {
+		ArrayList<Item> items = new ArrayList<Item>();
+		try {
+			String sql = "SELECT * FROM item WHERE type=" + type + " and status=" + status;
+			var ps = DBConnect.getConn().createStatement();
+			ResultSet res = ps.executeQuery(sql);
+			while (res.next()) {
+				Item item = new Item();
+				item.fill(res);
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
+	
+	public static ArrayList<Item> all(int status) {
+		ArrayList<Item> items = new ArrayList<Item>();
+		try {
+			String sql = "SELECT * FROM item WHERE status=" + status;
+			var ps = DBConnect.getConn().createStatement();
+			ResultSet res = ps.executeQuery(sql);
+			while (res.next()) {
+				Item item = new Item();
+				item.fill(res);
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
+	
+	public static ArrayList<Item> all() {
+		ArrayList<Item> items = new ArrayList<Item>();
+		try {
+			String sql = "SELECT * FROM item WHERE status >= 0";
+			var ps = DBConnect.getConn().createStatement();
+			ResultSet res = ps.executeQuery(sql);
+			while (res.next()) {
+				Item item = new Item();
+				item.fill(res);
+				items.add(item);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return items;
+	}
+
+	public static Item withId(int id) {
+		try {
+			String sql = "SELECT * FROM item WHERE id=" + id;
+			var ps = DBConnect.getConn().createStatement();
+			ResultSet res = ps.executeQuery(sql);
+			while (res.next()) {
+				Item item = new Item();
+				item.fill(res);
+				return item;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static void updateImage(Item item, String image, String thump) {
+		try {
+			String sql = "UPDATE item SET image='" + image + "', thump='" + thump + "' WHERE id=" + item.getId();
+			var ps = DBConnect.getConn().createStatement();
+			ps.execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void updateStatus(Item item) {
+		try {
+			String sql = "UPDATE item SET status=? WHERE id=" + item.getId();
+			var ps = DBConnect.getConn().prepareStatement(sql);
+			ps.setInt(1, item.getStatus());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+	public static void updateInfo(Item item) {
+		JSONArray arr = new JSONArray();
+		for (var info : item.getInfos()) {
+			JSONObject job = new JSONObject();
+			job.put("size", Integer.valueOf(info.getSize()));
+			job.put("quantity", Integer.valueOf(info.getQuantity()));
+			arr.add(job);
+		}
+		try {
+			String sql = "UPDATE item SET infos='" + arr.toJSONString() + "' WHERE id=" + item.getId();
+			var ps = DBConnect.getConn().createStatement();
+			ps.execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public static void updateItem(Item item) {
+		try {
+			String sql = "UPDATE item SET type=?, name=?, description=?, price=?, colorId=?, new=?, sale=? WHERE id=" + item.getId();
+			var ps = DBConnect.getConn().prepareStatement(sql);
+			ps.setInt(1, item.getType());
+			ps.setString(2, item.getName());
+			ps.setString(3, item.getDescription());
+			ps.setInt(4, item.getPrice());
+			ps.setInt(5, item.getColorId());
+			ps.setBoolean(6, item.isNew());
+			ps.setInt(7, item.getSale());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean insert(Item item) {
+		try {
+			String sql = "INSERT INTO item(id, type, name, description, price, colorId, status, infos, image, new, sale) VALUES(NULL, ?, ?, ?, ?, ?, ?, '[]', '[]', ?, ?)";
+			var ps = DBConnect.getConn().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setInt(1, item.getType());
+			ps.setString(2, item.getName());
+			ps.setString(3, item.getDescription());
+			ps.setInt(4, item.getPrice());
+			ps.setInt(5, item.getColorId());
+			ps.setInt(6, item.getStatus());
+			ps.setBoolean(7, item.isNew());
+			ps.setInt(8, item.getSale());
+			int row = ps.executeUpdate();
+			ResultSet res = ps.getGeneratedKeys();
+			if (res.next()) {
+				item.setId(res.getInt(1));
+			}
+			return row == 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+}

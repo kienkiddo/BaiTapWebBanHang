@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import commom.PageInfo;
 import commom.Security;
@@ -21,6 +22,8 @@ public class LogoutServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Security.deleteCookieLogin(response);
+		HttpSession session = request.getSession();
+		session.removeAttribute("user");
 		response.sendRedirect("trang-chu");
 	}
 

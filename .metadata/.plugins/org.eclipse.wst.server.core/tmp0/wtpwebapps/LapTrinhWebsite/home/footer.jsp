@@ -12,7 +12,7 @@
 			<div class="col-lg-6">
 				<h3>THÔNG TIN LIÊN HỆ</h3>
 				<a href="#" style="color: #000"><i class="fas fa-phone"></i>
-					Hotline: 0999999999</a></br> <a href="#" style="color: #000"><i
+					Hotline: 0986.232.323</a></br> <a href="#" style="color: #000"><i
 					class="fab fa-facebook"></i> Facebook: PTIT.VN</a>
 			</div>
 		</div>

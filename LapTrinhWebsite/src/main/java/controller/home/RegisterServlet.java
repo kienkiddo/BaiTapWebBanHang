@@ -23,8 +23,13 @@ public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PageInfo page = new PageInfo("Đăng ký", "register.jsp");
-		page.forward(request, response);
+		User user = (User) request.getAttribute("user");
+		if (user != null) {
+			response.sendRedirect("trang-chu");
+		} else {
+			PageInfo page = new PageInfo("Đăng ký", "register.jsp");
+			page.forward(request, response);
+		}
 	}
 
 

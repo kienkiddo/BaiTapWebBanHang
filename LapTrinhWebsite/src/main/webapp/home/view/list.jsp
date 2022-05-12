@@ -93,7 +93,7 @@
 			}
 		}
 		if (text == "") {
-			text = "<div class='col'><p class='text-center'>Hiện không có sản phầm nào.</p></div>";
+			text = "<div class='col'><p class='text-center'>Hiện không có sản phẩm nào.</p></div>";
 		}
 		$("#data").html(text);
 

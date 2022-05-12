@@ -24,8 +24,14 @@ public class LoginServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PageInfo page = new PageInfo("Đăng nhập", "login.jsp");
-		page.forward(request, response);
+		User user = (User) request.getAttribute("user");
+		if (user != null) {
+			response.sendRedirect("trang-chu");
+		} else {
+			PageInfo page = new PageInfo("Đăng nhập", "login.jsp");
+			page.forward(request, response);
+		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

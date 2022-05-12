@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import commom.PageInfo;
 import commom.Security;
+import io.HistoryData;
 import io.UserData;
 import model.User;
 
@@ -23,11 +24,20 @@ public class UserAboutServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PageInfo page = new PageInfo("Thông tin cá nhân", "about.jsp");
-		page.forward(request, response);
+		User user = (User) request.getAttribute("user");
+		if (user != null) {
+			var historys = HistoryData.withUserId(user.getId());
+			request.setAttribute("historys", historys);
+			PageInfo page = new PageInfo("Thông tin cá nhân", "about.jsp");
+			page.forward(request, response);
+		} else {
+			response.sendRedirect("trang-chu");
+		}
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 	}
 

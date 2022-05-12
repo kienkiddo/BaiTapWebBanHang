@@ -36,12 +36,12 @@ public class Bill {
 	
 	public Item getItem() {
 		if (this.item == null) {
-			this.item = ItemData.withId(this.id);
+			this.item = ItemData.withId(this.itemId);
 		}
 		return this.item;
 	}
 	
-
+	
 	public int getId() {
 		return id;
 	}
@@ -50,6 +50,7 @@ public class Bill {
 		this.id = id;
 	}
 
+	
 	public int getItemId() {
 		return itemId;
 	}

@@ -33,7 +33,7 @@
                   </div>
                 </span>
                 <input class="form-control py-2 border-left-0 border"  id="address" name="address"
-                  placeholder="Địa chỉ" value="" required>
+                  placeholder="Địa chỉ" value="${address}" required>
               </div>
               <div class="input-group form-group">
                 <span class="input-group-prepend">

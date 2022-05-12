@@ -2,6 +2,8 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -38,6 +40,8 @@ public class Item {
 	private int sale;
 	
 	private boolean isNew;
+	
+	private Timestamp timecreat;
 
 	private String[] images = null;
 	
@@ -47,13 +51,15 @@ public class Item {
 		
 	}
 	
-	public Item (int type, String name, String description, int price, int colorId, int status) {
+	public Item (int type, String name, String description, int price, int colorId, int status, boolean isNew, int sale) {
 		this.type = type;
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.colorId = colorId;
 		this.status = status;
+		this.isNew = isNew;
+		this.sale = sale;
 	}
 	
 	public void fill(ResultSet res) throws SQLException {
@@ -68,6 +74,7 @@ public class Item {
 		this.status = res.getInt("status");
 		this.colorId = res.getInt("colorId");
 		this.isNew = res.getBoolean("new");
+		this.timecreat = res.getTimestamp("timecreat");
 		this.sale = res.getInt("sale");
 		if (this.sale > 0) {
 			cost = this.price - this.sale * this.price / 100;;
@@ -123,6 +130,15 @@ public class Item {
 			}
 		}
 		return 0;
+	}
+	
+	public boolean getIsEmpty() {
+		for (var item : this.getInfos()) {
+			if (item.getQuantity() > 0) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public String getThump() {
@@ -212,5 +228,21 @@ public class Item {
 	public void setStrImage(String strImage) {
 		this.strImage = strImage;
 	}
+
+	public Timestamp getTimecreat() {
+		return timecreat;
+	}
+	
+	public String getTime() {
+		SimpleDateFormat df = new SimpleDateFormat("YYYY/MM/dd");
+	    String s = df.format(this.timecreat);
+	    return s;
+	}
+
+	public void setTimecreat(Timestamp timecreat) {
+		this.timecreat = timecreat;
+	}
+	
+	
 	
 }

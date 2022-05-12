@@ -30,7 +30,7 @@
 				<div class="collapse navbar-collapse" id="navbarCollapse">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item text-uppercase font-weight-bold li-item">
-							<a class="nav-link a-item" href="admin/trang-chu">Trang chủ</a>
+							<a class="nav-link a-item" href="<c:url value='/admin'/>">Trang chủ</a>
 						</li>
 
 					</ul>
